@@ -16,6 +16,7 @@ from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn.metrics import precision_score, recall_score, f1_score, precision_recall_curve
 import numpy as np
 
+from fourlang_baselines import fourlang
 from high_dim_distr import weedsPrec, invCL, vecForRel
 from misc import voice_of_id, words_from_id, normalized_star_type,\
     init_logging, log_with_size, combine_type, get_path, FilePathDict,\
@@ -766,6 +767,7 @@ score_fun = {
     "TransE (typed)": transE_typed_score,
     "ComplEx (untyped)": complEx_untyped_score,
     "ComplEx (typed)": complEx_typed_score,
+    "4lang": fourlang
 }
 
 
@@ -1106,7 +1108,6 @@ def run_baseline(dataset, method, examples=False, use_lemma=True, threshold=0.5)
             pr, hy, type_pr, id_pr, type_hy, id_hy,
             reversed_pr, reversed_hy
         ]
-
         if use_lemma and lemma(*method_args):
             pred.append(True)
         else:
